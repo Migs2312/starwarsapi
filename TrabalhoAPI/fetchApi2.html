@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Ola</title>
+</head>
+<body>
+    <label for="film">Filme </label>
+    <input type="Number" id="tit"> Insira o número que indica a ordem no qual o filme foi lançado (Ex.: Filme Star Wars: A New Hope -- 1)<br>
+    <input type="button" value="Enviar" id="enviar"><br>
+    <div id="mostra"></div>
+  
+  <script>
+    //executar função//
+    document.querySelector('#enviar').addEventListener('click',consulta);
+    //executar função//
+    
+    //buscar dados//
+    async function consulta(){
+        let film = document.querySelector('#tit').value;
+        const url='https://swapi.dev/api/films/' + film + '/';
+        try{
+            let resposta=  await fetch(url);
+            let js = await resposta.json();
+            mostraDados(js);
+        }catch {
+            console.log(err)
+        }
+    }
+    //buscar dados//
+
+    //mostrar dados//
+    function mostraDados(js){
+        const painel = document.querySelector('#mostra');
+        let texto= "<h1>Filme solicitado</h1>";
+        texto = texto + "Nome: Star Wars: "+ js.title+"<br><br>";
+        texto = texto + "Número do Episódio (cronológicamente): "+ js.episode_id+"<br><br>";
+        texto = texto + "Abertura: "+ js.opening_crawl+"<br><br>";
+        texto = texto + "Lançamento: "+ js.release_date+"<br><br>";
+        texto = texto + "Para traduzir: https://translate.google.com.br/?hl=pt-BR<br><br>"
+        painel.innerHTML = texto;
+    }
+    //mostrar dados//
+    
+</script>
+</body>
+</html>
