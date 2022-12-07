@@ -16,6 +16,7 @@ body{
 .anim.end{
     border:5px white solid;
     width:70vw;
+    min-height:500px;
     height:fit-content;
     padding:5px;
     font-size: 20px;
